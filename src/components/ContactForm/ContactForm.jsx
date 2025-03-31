@@ -2,14 +2,26 @@ import css from "../ContactForm/ContactForm.module.css"
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup"
 import { nanoid } from 'nanoid'
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from '../../redux/contactsSlice';
 
 
-export default function ContactForm({addContacts}) {
+export default function ContactForm() {
 
-    const formSubmit = (values, actions) => {
-        addContacts({ ...values, id: nanoid() })
-        actions.resetForm();
-    }
+    const dispatch = useDispatch();
+    const contacts = useSelector((state) => state.contacts.items)
+
+    const formSubmit = (values, { resetForm }) => {
+    const newContact = {
+        id: nanoid(),
+        name: values.name,
+        number: values.number
+    };
+    dispatch(addContact(newContact));
+    resetForm(); 
+};
+
+
 
     const SignupSchema = Yup.object().shape({
    name: Yup.string()

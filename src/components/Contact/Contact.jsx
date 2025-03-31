@@ -1,19 +1,29 @@
 import css from "./Contact.module.css"
 import { FaUser } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa";
+import { useDispatch} from 'react-redux';
+import { deleteContact } from '../../redux/contactsSlice';
 
-export default function Contacts({ value,removeContact }) {
+
+export default function Contacts({value}) {
+    const dispatch = useDispatch();
+
+    const handleRemoveContact = (id) => {
+
+        dispatch(deleteContact(id));
+    };
+    
+
 
     return (
         <div className={css.contactsBox}>
-            <div>
-                
-            <p><FaUser/> {value.name}</p>
-            <p><FaPhone/> {value.number}</p>
-                
-            </div>
             
-            <button type="button" onClick={() => removeContact(value.id)} >Delete</button>
+                <div key={value.id}>
+                    <p><FaUser /> {value.name}</p>
+                    <p><FaPhone /> {value.number}</p>
+                    <button type="button" onClick={() => handleRemoveContact(value.id)}>Видалити</button>
+                </div>
+        
         </div>
-    )
+    );
 }
