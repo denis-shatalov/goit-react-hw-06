@@ -9,9 +9,8 @@ export default function App() {
             <h1>Phonebook</h1>
             <ContactForm/>
             <SearchBox/>
-            <ContactList/>
-            
-</div>
+            <ContactList />
+        </div>
 
     )
 }

@@ -5,10 +5,10 @@ import { changeFilter } from '../../redux/filtersSlice';
 export default function SearchBox() {
     
      const dispatch = useDispatch();
-    const filter = useSelector((state) => state.filter.name);
+    const filter = useSelector((state) => state.filters.name);
 
-    const searchContacts = (event) => {
-        dispatch(changeFilter(event.target.value))
+    function searchContacts(event) {
+        dispatch(changeFilter(event.target.value));
 
     }
 
